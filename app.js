@@ -17,11 +17,11 @@ var vizz_email  = require('./lib/email').email;
 
 // Email message
 var message = {
-  text:        "This week {{ p1_alias }} and {{ p2_alias }} are gonna clean the office :)", 
+  text:        "This week {{ p1_alias }} and {{ p2_alias }} are going to clean the office :)", 
   from:        "Vizziotica <jmedina@vizzuality.com>", 
   to:          CONFIG.gmail.to,
   cc:          "",
-  subject:     "This week {{ p1_alias }} and {{ p2_alias }} are gonna clean the office :)",
+  subject:     "This week {{ p1_alias }} and {{ p2_alias }} are going to clean the office :)",
   attachment:  [{
     data:         vizz_email,
     alternative:  true
@@ -61,10 +61,29 @@ var job = new cronJob({
 
 job.start();
 
+
+// Server
+var express = require('express');
+var app = express();
+
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function(req, res){
+  res.send('Hello World');
+});
+
+app.listen(3000);
+
 // Parsing message
 function parseMessage(msg, data) {
-  msg.text    = msg.text.replace('{{ p1_alias }}', data.p1_alias).replace('{{ p2_alias }}', data.p2_alias);
-  msg.subject = msg.subject.replace('{{ p1_alias }}', data.p1_alias).replace('{{ p2_alias }}', data.p2_alias);
+  msg.text                = msg.text.replace('{{ p1_alias }}', data.p1_alias).replace('{{ p2_alias }}', data.p2_alias);
+  msg.subject             = msg.subject.replace('{{ p1_alias }}', data.p1_alias).replace('{{ p2_alias }}', data.p2_alias);
+  msg.attachment[0].data  = msg.attachment[0].data
+    .replace(/{{ p1_twitter }}/g, data.p1_twitter)
+    .replace(/{{ p2_twitter }}/g, data.p2_twitter)
+    .replace(/{{ p1_alias }}/g, data.p1_alias)
+    .replace(/{{ p2_alias }}/g, data.p2_alias)
+    .replace(/{{ host }}/g, CONFIG.host);
   return msg;
 }
 
