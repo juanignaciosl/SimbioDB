@@ -1,4 +1,4 @@
-vizziotica-mail
+Vizziotica
 ===============
 
-Vizziotica mail subscription
+Let's clean Vizziotica office!
