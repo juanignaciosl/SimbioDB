@@ -12,3 +12,8 @@ logs
 results
 
 npm-debug.log
+
+config/default.yaml
+config/production.yaml
+config/runtime.json
+node_modules/
