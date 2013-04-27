@@ -13,7 +13,7 @@ results
 
 npm-debug.log
 
-config/default.yaml
-config/production.yaml
+config/default.json
+config/production.json
 config/runtime.json
 node_modules/

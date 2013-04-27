@@ -1,0 +1,16 @@
+{
+  "gmail": {
+    "username": "hello",
+    "email":    "hello@world.com",
+    "password": "helloworld",
+    "to":       "to@you.com"
+  },
+  "cron": {
+    "when":     "* * * * *"
+  },
+  "cartodb": {
+    "user":     "hello",
+    "api_key":  "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "host":       "http://yourapp.herokuapp.com"
+}

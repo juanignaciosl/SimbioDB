@@ -1,6 +1,6 @@
 // Modules
 var email   = require("emailjs");
-var CONFIG  = require("config");
+var CONFIG  = require("config-heroku");
 var cronJob = require('cron').CronJob;
 var CartoDB = require('cartodb');
 var server  = email.server.connect({
