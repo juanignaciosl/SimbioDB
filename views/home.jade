@@ -4,15 +4,18 @@ block content
   div(class="main")
     h1 Who are going to clean this week?
     p This guys will take care of the Vizziotica office this week. It doesn't mean you don't have to help them. Don't be dirty and collaborate, it's easy and free.
-    ul
-      li
-        img(src="/img/#{ p1_twitter }.png", title="#{ p1_alias }")
-        p(class="bold center") #{ p1_alias }
-        p.center
-          a(href="http://twitter.com/#{ p1_twitter }", target="_blank") @#{ p1_twitter }
-      li.special +
-      li
-        img(src="/img/#{ p2_twitter }.png", title="#{ p2_alias }")
-        p(class="bold center") #{ p2_alias }
-        p.center
-          a(href="http://twitter.com/#{ p2_twitter }", target="_blank") @#{ p2_twitter }
+    div.list
+      ul
+        li
+          img(src="/img/#{ p1_twitter }.png", title="#{ p1_alias }", class="avatar")
+          p(class="bold center") #{ p1_alias }
+          p.center
+            a(href="http://twitter.com/#{ p1_twitter }", target="_blank") @#{ p1_twitter }
+        li.special +
+        li
+          img(src="/img/#{ p2_twitter }.png", title="#{ p2_alias }", class="avatar")
+          p(class="bold center") #{ p2_alias }
+          p.center
+            a(href="http://twitter.com/#{ p2_twitter }", target="_blank") @#{ p2_twitter }
+    div.bottom
+      p.small Eloy Gonzalo 27, 2º floor, 6th door

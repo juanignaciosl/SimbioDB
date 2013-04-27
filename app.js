@@ -90,6 +90,27 @@ app.get('/', function(req, res){
   });
 });
 
+// Error pages //
+
+app.get('/maintenance', function(req, res){
+  res.render('maintenance');
+});
+
+app.get('/error', function(req, res){
+  res.render('error');
+});
+
+app.use(function(req, res, next){
+  res.render('error', { status: 404, url: req.url });
+});
+
+app.use(function(err, req, res, next){
+  res.render('error', {
+      status: err.status || 500
+    , error: err
+  });
+});
+
 if (!module.parent) {
   var port = process.env.PORT || 3000;
   app.listen(port);
