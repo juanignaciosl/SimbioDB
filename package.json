@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "emailjs":  "0.3.3",
-    "yaml":     "*",
+    "yaml":     "0.2.3",
     "config":   "0.4.16",
     "cron":     "1.0.1",
     "time":     "0.9.2",
