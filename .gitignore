@@ -16,4 +16,5 @@ npm-debug.log
 config/default.json
 config/production.json
 config/runtime.json
+config/heroku.json
 node_modules/
