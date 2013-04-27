@@ -1,0 +1,14 @@
+
+  * {-webkit-margin-before:0em; -webkit-margin-after:0em;}
+  html, body {margin:0; padding:0; -webkit-font-smoothing: antialiased; font-family:Arial;}
+  div.main {width:571px; padding:50px 0; margin:0 auto;}
+  h1 {font:bold 27px Arial; color:#333333;}
+  p {font:normal 15px Arial; color:#666666;}
+  p.bold {margin:8px 0 0; font:bold 16px Arial; color:#444;}
+  p.center {text-align:center;}
+  ul {display:block; margin:50px 0 0; padding:0 130px; list-style:none; letter-spacing:-4px;}
+  li {display:inline-block; *display:inline; vertical-align:top; width:120px; letter-spacing:0;}
+  li.special {width:54px; padding:50px 0 0; font:bold 26px Arial; color:#ABABAB; text-align:center; vertical-align:top;}
+  img {margin:0 10px;}
+  a {margin:5px 0 0; font:normal 14px Arial; color:#397DB9; text-align:center; text-decoration:none;}
+  a:hover {text-decoration:underline}

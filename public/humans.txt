@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    xavijam -- coffee boy -- @xavijam
+
+# THANKS
+
+    Vizzuality team
+    Simbiotica team
+
+# TECHNOLOGY COLOPHON
+
+    Nothing special
