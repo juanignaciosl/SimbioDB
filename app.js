@@ -76,7 +76,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.cookieParser());
   app.use(app.router);
-  app.use(express.static('./public'));
+  app.use(express.static('./public', { maxAge: 86400000 })); // One day
 });
 
 app.get('/', function(req, res){
