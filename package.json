@@ -28,7 +28,7 @@
     "url": "http://github.com/xavijam/vizziotica-mail"
   },
   "engines": {
-    "node": ">= 0.8.11",
+    "node": ">= 0.10.5",
     "npm": ">= 1.0.0"
   },
   "dependencies": {
