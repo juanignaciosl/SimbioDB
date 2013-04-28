@@ -133,5 +133,5 @@ function parseMessage(msg, data) {
 // Date helper
 Date.prototype.getWeekFrom = function(date) {
   var onejan = new Date(date);
-  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay())/7);
+  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() - 1)/7);
 }
