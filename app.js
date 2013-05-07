@@ -3,6 +3,7 @@ var email   = require("emailjs");
 var CONFIG  = require("config-heroku");
 var cronJob = require('cron').CronJob;
 var CartoDB = require('cartodb');
+var _u      = require('underscore');
 var server  = email.server.connect({
   user:      CONFIG.gmail.email,
   password:  CONFIG.gmail.password,
@@ -13,19 +14,10 @@ var server  = email.server.connect({
 // App vars
 var pairs       = 7;
 var start_date  = new Date('2013-04-22');
-var vizz_email  = require('./lib/email').email;
 
-// Email message
-var message = {
-  text:        "This week {{ p1_alias }} and {{ p2_alias }} are going to clean the office :)", 
-  from:        "Vizziotica <jmedina@vizzuality.com>", 
-  to:          CONFIG.gmail.to,
-  cc:          "",
-  subject:     "This week {{ p1_alias }} and {{ p2_alias }} are going to clean the office :)",
-  attachment:  [{
-    data:         vizz_email,
-    alternative:  true
-  }]
+// Underscore 
+_u.templateSettings = {
+  interpolate : /\{\{(.+?)\}\}/g
 };
 
 // CartoDB client
@@ -37,23 +29,74 @@ var client = new CartoDB({
 client.connect();
 
 
-// Runs every Monday at 09:30:00 AM in production.
+// Runs every day at 09:30:00 AM in production.
 // send the message and get a callback with an
 // error or details of the message that was sent
 var job = new cronJob({
   cronTime: CONFIG.cron.when,
   onTick: function() {
-    // Get turn
-    var actual_week = new Date().getWeekFrom(start_date);
-    var turn = actual_week % pairs;
 
-    client.query("SELECT * FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, data){
-      // Send email
-      if (!err && data.rows && data.rows[0])
-        server.send(parseMessage(message, data.rows[0]), function(err, message) {
-          if (err) console.log(err);
-        });
+    var today = new Date();
+
+    // Any birthday?
+    client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL", {}, function(err, data){
+      // Check if it is birthday
+      for (var i in data.rows) {
+        var birth = new Date(data.rows[i].birthday);
+
+        if (birth.getMonth() == today.getMonth() && birth.getDate() == today.getDate()) {
+          // Compose the data
+          var data = data.rows[i];
+          data.birthday = birth;
+          data.host = CONFIG.host;
+
+          var message = {
+            text:        _u.template("Happy birthday {{ alias }}!")(data),
+            from:        "Vizziotica <jmedina@vizzuality.com>", 
+            to:          CONFIG.gmail.to,
+            cc:          "",
+            subject:     _u.template("Happy birthday {{ alias }}!")(data),
+            attachment:  [{
+              data:         _u.template(require('./lib/birthday_email').email)(data),
+              alternative:  true
+            }]
+          };
+          server.send(message, function(err, message) {
+            if (err) console.log(err);
+          });
+        }
+      }
     });
+
+    // If it is Monday, pair cleaning email!
+    if (today.getDay() == 1) {
+      // Get turn
+      var actual_week = today.getWeekFrom(start_date);
+      var turn = actual_week % pairs;
+      // Email message
+      var message = {
+        text:        "This week {{ p1_alias }} and {{ p2_alias }} are going to clean the office :)", 
+        from:        "Vizziotica <jmedina@vizzuality.com>", 
+        to:          CONFIG.gmail.to,
+        cc:          "",
+        subject:     "This week {{ p1_alias }} and {{ p2_alias }} are going to clean the office :)",
+        attachment:  [{
+          data:         require('./lib/cleaning_email').email,
+          alternative:  true
+        }]
+      };
+
+      client.query("SELECT * FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, data){
+        // Send email
+        if (!err && data.rows && data.rows[0]) {
+          server.send(parseMessage(message, data.rows[0]), function(err, message) {
+            if (err) console.log(err);
+          });
+        }
+          
+      });
+    }
+
   },
   start: false,
   timeZone: "Europe/Madrid"
@@ -134,4 +177,14 @@ function parseMessage(msg, data) {
 Date.prototype.getWeekFrom = function(date) {
   var onejan = new Date(date);
   return Math.ceil((((this - onejan) / 86400000) + onejan.getDay())/7);
+}
+
+Date.prototype.getAge = function(date) {
+  var today = new Date();
+  var age = today.getFullYear() - this.getFullYear();
+  var m = today.getMonth() - this.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < this.getDate())) {
+    age--;
+  }
+  return age;
 }
