@@ -73,27 +73,35 @@ var job = new cronJob({
       // Get turn
       var actual_week = today.getWeekFrom(start_date);
       var turn = actual_week % pairs;
-      // Email message
-      var message = {
-        text:        "This week {{ p1_alias }} and {{ p2_alias }} are going to clean the office :)", 
-        from:        "Vizziotica <jmedina@vizzuality.com>", 
-        to:          CONFIG.gmail.to,
-        cc:          "",
-        subject:     "This week {{ p1_alias }} and {{ p2_alias }} are going to clean the office :)",
-        attachment:  [{
-          data:         require('./lib/cleaning_email').email,
-          alternative:  true
-        }]
-      };
 
-      client.query("SELECT * FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, data){
+      client.query("SELECT p1_guy,p2_guy FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, guys){
         // Send email
-        if (!err && data.rows && data.rows[0]) {
-          server.send(parseMessage(message, data.rows[0]), function(err, message) {
-            if (err) console.log(err);
+        if (!err && guys.rows && guys.rows[0]) {
+
+          client.query("SELECT * FROM cleaning_guys WHERE cartodb_id=" + guys.rows[0].p1_guy + " OR cartodb_id=" + guys.rows[0].p2_guy , {}, function(err, data){
+            // Send email
+            if (!err && data.rows && data.rows[0]) {
+              data.host = CONFIG.host;
+              // Email message
+              var message = {
+                text:        _u.template("This week {{ rows[0].alias }} and {{ rows[1].alias }} are going to clean the office :)")(data),
+                from:        "Vizziotica <jmedina@vizzuality.com>", 
+                to:          CONFIG.gmail.to,
+                cc:          "",
+                subject:     _u.template("This week {{ rows[0].alias }} and {{ rows[1].alias }} are going to clean the office :)")(data),
+                attachment:  [{
+                  data:         _u.template(require('./lib/cleaning_email').email)(data),
+                  alternative:  true
+                }]
+              };
+
+              server.send(message, function(err, message) {
+                if (err) console.log(err);
+              });
+            }
+              
           });
         }
-          
       });
     }
 
@@ -127,9 +135,15 @@ app.get('/', function(req, res){
   var actual_week = new Date().getWeekFrom(start_date);
   var turn = actual_week % pairs;
 
-  client.query("SELECT * FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, data){
-    if (err) data = { rows: [{}]};
-    res.render('home', data.rows[0]);
+  client.query("SELECT p1_guy,p2_guy FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, guys){
+    // Send email
+    if (!err && guys.rows && guys.rows[0]) {
+
+      client.query("SELECT * FROM cleaning_guys WHERE cartodb_id=" + guys.rows[0].p1_guy + " OR cartodb_id=" + guys.rows[0].p2_guy , {}, function(err, data){
+        if (err) data = { rows: [{}]};
+        res.render('home', data);
+      });
+    }
   });
 });
 
