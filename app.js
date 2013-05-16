@@ -61,7 +61,7 @@ var job = new cronJob({
               alternative:  true
             }]
           };
-          server.send(message, function(err, message) {
+          server.send(message, function(err, msg) {
             if (err) console.log(err);
           });
         }
@@ -95,7 +95,7 @@ var job = new cronJob({
                 }]
               };
 
-              server.send(message, function(err, message) {
+              server.send(message, function(err, msg) {
                 if (err) console.log(err);
               });
             }
