@@ -12,7 +12,7 @@ var server  = email.server.connect({
 });
 
 // App vars
-var pairs       = 7;
+var pairs       = 6;
 var start_date  = new Date('2013-04-22');
 
 // Underscore 
@@ -39,7 +39,8 @@ var job = new cronJob({
     var today = new Date();
 
     // Any birthday?
-    client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL", {}, function(err, data){
+    client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, data){
+
       // Check if it is birthday
       for (var i in data.rows) {
         var birth = new Date(data.rows[i].birthday);
@@ -52,7 +53,7 @@ var job = new cronJob({
 
           var message = {
             text:        _u.template("Happy birthday {{ alias }}!")(data),
-            from:        "Vizziotica <jmedina@vizzuality.com>", 
+            from:        "Vizziotica <chorradas@vizzuality.com>", 
             to:          CONFIG.gmail.to,
             cc:          "",
             subject:     _u.template("Happy birthday {{ alias }}!")(data),
@@ -85,7 +86,7 @@ var job = new cronJob({
               // Email message
               var message = {
                 text:        _u.template("This week {{ rows[0].alias }} and {{ rows[1].alias }} are going to clean the office :)")(data),
-                from:        "Vizziotica <jmedina@vizzuality.com>", 
+                from:        "Vizziotica <chorradas@vizzuality.com>", 
                 to:          CONFIG.gmail.to,
                 cc:          "",
                 subject:     _u.template("This week {{ rows[0].alias }} and {{ rows[1].alias }} are going to clean the office :)")(data),
@@ -137,12 +138,13 @@ app.get('/', function(req, res){
 
   client.query("SELECT p1_guy,p2_guy FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, guys){
     // Send email
-    if (!err && guys.rows && guys.rows[0]) {
-
+    if (!err && guys.rows && guys.rows.length > 0) {
       client.query("SELECT * FROM cleaning_guys WHERE cartodb_id=" + guys.rows[0].p1_guy + " OR cartodb_id=" + guys.rows[0].p2_guy , {}, function(err, data){
         if (err) data = { rows: [{}]};
         res.render('home', data);
       });
+    } else {
+      res.render('error');
     }
   });
 });
