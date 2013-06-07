@@ -51,6 +51,8 @@ var job = new cronJob({
           d_.birthday = birth;
           d_.host = CONFIG.host;
 
+          console.log("BIRTHDAY! " + d_.name);
+
           var message = {
             text:        _u.template("Happy birthday {{ alias }}!")(d_),
             from:        "Vizziotica <chorradas@vizzuality.com>", 
