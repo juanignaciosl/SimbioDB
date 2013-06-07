@@ -39,26 +39,26 @@ var job = new cronJob({
     var today = new Date();
 
     // Any birthday?
-    client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, data){
+    client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, guys){
 
       // Check if it is birthday
-      for (var i in data.rows) {
-        var birth = new Date(data.rows[i].birthday);
+      for (var i = 0; i < guys.rows.length; i++) {
+        var birth = new Date(guys.rows[i].birthday);
 
         if (birth.getMonth() == today.getMonth() && birth.getDate() == today.getDate()) {
           // Compose the data
-          var data = data.rows[i];
-          data.birthday = birth;
-          data.host = CONFIG.host;
+          var d_ = guys.rows[i];
+          d_.birthday = birth;
+          d_.host = CONFIG.host;
 
           var message = {
-            text:        _u.template("Happy birthday {{ alias }}!")(data),
+            text:        _u.template("Happy birthday {{ alias }}!")(d_),
             from:        "Vizziotica <chorradas@vizzuality.com>", 
             to:          CONFIG.gmail.to,
             cc:          "",
-            subject:     _u.template("Happy birthday {{ alias }}!")(data),
+            subject:     _u.template("Happy birthday {{ alias }}!")(d_),
             attachment:  [{
-              data:         _u.template(require('./lib/birthday_email').email)(data),
+              data:         _u.template(require('./lib/birthday_email').email)(d_),
               alternative:  true
             }]
           };
