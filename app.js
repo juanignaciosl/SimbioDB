@@ -11,8 +11,6 @@ var server  = email.server.connect({
   ssl:       true
 });
 
-console.log(new Date().getDate(), new Date().getMonth());
-
 // App vars
 var pairs       = 6;
 var start_date  = new Date('2013-04-22');
@@ -47,7 +45,6 @@ var job = new cronJob({
       for (var i = 0; i < guys.rows.length; i++) {
         var birth = new Date(guys.rows[i].birthday);
 
-        console.log(birth.getMonth() + "/" + birth.getDate(), today.getMonth() + "/" + today.getDate());
         if (birth.getMonth() == today.getMonth() && birth.getDate() == today.getDate()) {
           // Compose the data
           var d_ = guys.rows[i];
@@ -68,10 +65,9 @@ var job = new cronJob({
             }]
           };
 
-          return false;
-          // server.send(message, function(err, msg) {
-          //   if (err) console.log(err);
-          // });
+          server.send(message, function(err, msg) {
+            if (err) console.log(err);
+          });
         }
       }
     });
@@ -155,6 +151,12 @@ app.get('/', function(req, res){
     }
   });
 });
+
+app.get('/today', function() {
+  var t = new Date();
+  console.log(t.getDate() + "/" + (t.getMonth()+1) + "/" + t.getFullYear());
+  res.end();
+})
 
 // Error pages //
 
