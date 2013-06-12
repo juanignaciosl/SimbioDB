@@ -11,7 +11,7 @@ var server  = email.server.connect({
   ssl:       true
 });
 
-console.log(new Date.getDate(), new Date.getMonth());
+console.log(new Date().getDate(), new Date().getMonth());
 
 // App vars
 var pairs       = 6;
