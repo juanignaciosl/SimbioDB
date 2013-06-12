@@ -152,9 +152,10 @@ app.get('/', function(req, res){
   });
 });
 
-app.get('/today', function() {
+app.get('/today', function(req, res) {
   var t = new Date();
-  console.log(t.getDate() + "/" + (t.getMonth()+1) + "/" + t.getFullYear());
+  var t_str = t.getDate() + "/" + (t.getMonth()+1) + "/" + t.getFullYear();
+  res.write(t_str);
   res.end();
 })
 
@@ -180,7 +181,7 @@ app.use(function(err, req, res, next){
 });
 
 if (!module.parent) {
-  var port = process.env.PORT || 3000;
+  var port = process.env.PORT || 5000;
   app.listen(port);
   console.log('Vizziotica app started on port ' + port);
 }
