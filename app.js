@@ -12,7 +12,7 @@ var server  = email.server.connect({
 });
 
 // App vars
-var pairs       = 6;
+var pairs       = 7;
 var start_date  = new Date('2013-04-22');
 
 // Underscore 
@@ -140,7 +140,6 @@ app.get('/', function(req, res){
   var turn = actual_week % pairs;
 
   client.query("SELECT p1_guy,p2_guy FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, guys){
-    // Send email
     if (!err && guys.rows && guys.rows.length > 0) {
       client.query("SELECT * FROM cleaning_guys WHERE cartodb_id=" + guys.rows[0].p1_guy + " OR cartodb_id=" + guys.rows[0].p2_guy , {}, function(err, data){
         if (err) data = { rows: [{}]};
