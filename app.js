@@ -28,6 +28,22 @@ var client = new CartoDB({
 
 client.connect();
 
+// Runs every week at 09:00:00 AM checking if there was
+// any change in the number of pairs at vizziotica
+var check_cron = new cronJob({
+  cronTime: "0 9 * * 6",
+  onTick: function() {
+    client.query("SELECT count(*) FROM cleaning_pairs", {}, function(err, res){
+      console.log(err, res);
+      if (!err && res) {
+        pairs = res.rows[0].count;
+      }
+    });
+  },
+  start: true,
+  timeZone: "Europe/Madrid"
+});
+
 
 // Runs every day at 09:30:00 AM in production.
 // send the message and get a callback with an
