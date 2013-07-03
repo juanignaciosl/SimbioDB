@@ -13,7 +13,7 @@ var server  = email.server.connect({
 
 // App vars
 var pairs       = 7;
-var start_date  = new Date('2013-04-22');
+var start_date  = new Date('2013-04-15');
 
 // Underscore 
 _u.templateSettings = {
