@@ -12,7 +12,7 @@ var server  = email.server.connect({
 });
 
 // App vars
-var pairs       = 7;
+var pairs       = 9;
 var start_date  = new Date('2013-04-15');
 
 // Underscore 
@@ -221,10 +221,10 @@ Date.prototype.getWeekFrom = function(date) {
 }
 
 Date.prototype.getAge = function(date) {
-  var today = new Date();
-  var age = today.getFullYear() - this.getFullYear();
-  var m = today.getMonth() - this.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < this.getDate())) {
+  var _today = new Date();
+  var age = _today.getFullYear() - this.getFullYear();
+  var m = _today.getMonth() - this.getMonth();
+  if (m < 0 || (m === 0 && _today.getDate() < this.getDate())) {
     age--;
   }
   return age;
