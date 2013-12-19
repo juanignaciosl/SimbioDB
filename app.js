@@ -174,12 +174,13 @@ app.get('/today', function(req, res) {
   client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, guys){
     // Check if it is birthday
     for (var i = 0; i < guys.rows.length; i++) {
-      console.log(guys.rows[i].birthday);
-      console.log(new Date(guys.rows[i].birthday).getTimezoneOffset())
+      // console.log(guys.rows[i].birthday);
+      // console.log(new Date(guys.rows[i].birthday).getTimezoneOffset())
       var birth = new Date(guys.rows[i].birthday);
-      birth.setUTCDate(15);
+      utc = birth.getTime() + (birth.getTimezoneOffset() * 60000);
+      d = new Date(utc + (3600000*1));
 
-      birthdays += guys.rows[i].alias + " -> " + birth.getDate() + "/" + (birth.getMonth()+1) + "/" + birth.getFullYear() + "\n"
+      birthdays += guys.rows[i].alias + " -> " + d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear() + "\n"
     }
 
     res.write(birthdays);
