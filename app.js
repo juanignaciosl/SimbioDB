@@ -168,10 +168,21 @@ app.get('/', function(req, res){
 });
 
 app.get('/today', function(req, res) {
-  var t = new Date();
-  var t_str = t.getDate() + "/" + (t.getMonth()+1) + "/" + t.getFullYear();
-  res.write(t_str);
-  res.end();
+
+  client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, guys){
+    // Check if it is birthday
+    var birthdays = "";
+    for (var i = 0; i < guys.rows.length; i++) {
+      var birth = new Date(guys.rows[i].birthday);
+
+      birthdays += guys.rows[i].alias + " -> " + birth.getDate() + "/" + (birth.getMonth()+1) + "/" + birth.getFullYear() + "\n"
+    }
+
+    res.write(birthdays);
+    res.end();
+  });
+
+  
 })
 
 // Error pages //
