@@ -81,9 +81,9 @@ var job = new cronJob({
             }]
           };
 
-          server.send(message, function(err, msg) {
-            if (err) console.log(err);
-          });
+          // server.send(message, function(err, msg) {
+          //   if (err) console.log(err);
+          // });
         }
       }
     });
@@ -115,9 +115,9 @@ var job = new cronJob({
                 }]
               };
 
-              server.send(message, function(err, msg) {
-                if (err) console.log(err);
-              });
+              // server.send(message, function(err, msg) {
+              //   if (err) console.log(err);
+              // });
             }
               
           });
@@ -169,11 +169,15 @@ app.get('/', function(req, res){
 
 app.get('/today', function(req, res) {
 
+  var birthdays = "";
+
   client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, guys){
     // Check if it is birthday
-    var birthdays = "";
     for (var i = 0; i < guys.rows.length; i++) {
+      console.log(guys.rows[i].birthday);
+      console.log(new Date(guys.rows[i].birthday).getTimezoneOffset())
       var birth = new Date(guys.rows[i].birthday);
+      birth.setUTCDate(15);
 
       birthdays += guys.rows[i].alias + " -> " + birth.getDate() + "/" + (birth.getMonth()+1) + "/" + birth.getFullYear() + "\n"
     }
@@ -181,8 +185,6 @@ app.get('/today', function(req, res) {
     res.write(birthdays);
     res.end();
   });
-
-  
 })
 
 // Error pages //
