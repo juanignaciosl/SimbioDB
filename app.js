@@ -60,14 +60,14 @@ var job = new cronJob({
       // Check if it is birthday
       for (var i = 0; i < guys.rows.length; i++) {
         var birth = new Date(guys.rows[i].birthday);
+        var utc = birth.getTime() + (birth.getTimezoneOffset() * 60000);
+        var d = new Date(utc + (3600000*1));
 
-        if (birth.getMonth() == today.getMonth() && birth.getDate() == today.getDate()) {
+        if (d.getMonth() == today.getMonth() && d.getDate() == today.getDate()) {
           // Compose the data
           var d_ = guys.rows[i];
-          d_.birthday = birth;
+          d_.birthday = d;
           d_.host = CONFIG.host;
-
-          console.log("BIRTHDAY! " + d_.name);
 
           var message = {
             text:        _u.template("Happy birthday {{ alias }}!")(d_),
@@ -81,9 +81,9 @@ var job = new cronJob({
             }]
           };
 
-          // server.send(message, function(err, msg) {
-          //   if (err) console.log(err);
-          // });
+          server.send(message, function(err, msg) {
+            if (err) console.log(err);
+          });
         }
       }
     });
@@ -115,9 +115,9 @@ var job = new cronJob({
                 }]
               };
 
-              // server.send(message, function(err, msg) {
-              //   if (err) console.log(err);
-              // });
+              server.send(message, function(err, msg) {
+                if (err) console.log(err);
+              });
             }
               
           });
@@ -167,15 +167,13 @@ app.get('/', function(req, res){
   });
 });
 
-app.get('/today', function(req, res) {
+app.get('/birthdays', function(req, res) {
 
   var birthdays = "";
 
   client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, guys){
     // Check if it is birthday
     for (var i = 0; i < guys.rows.length; i++) {
-      // console.log(guys.rows[i].birthday);
-      // console.log(new Date(guys.rows[i].birthday).getTimezoneOffset())
       var birth = new Date(guys.rows[i].birthday);
       utc = birth.getTime() + (birth.getTimezoneOffset() * 60000);
       d = new Date(utc + (3600000*1));
