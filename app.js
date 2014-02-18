@@ -10,6 +10,7 @@ var server  = email.server.connect({
   host:      "smtp.gmail.com",
   ssl:       true
 });
+var https = require("https");
 
 // App vars
 var pairs       = 8;
@@ -212,6 +213,34 @@ if (!module.parent) {
   app.listen(port);
   console.log('Vizziotica app started on port ' + port);
 }
+
+var options = {
+  host: 'vizzuality.slack.com',
+  port: 443,
+  path: '/services/hooks/incoming-webhook\?token\=eRwr6My5dNarlhUKiiK8wfVh',
+  method: 'POST',
+  "Content-Type": "application/json",
+}; 
+
+var r = https.request(options, function(res) {
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    console.log('body: ' + chunk); 
+  });
+}); 
+
+r.on('error', function(e) {
+  console.log('problem with request: ' + e.message);
+}); 
+
+r.end(
+  JSON.stringify({
+    "channel":    "#general",
+    "username":   "cleaningbot",
+    "text":       "This week the cleaning personel is X & Y",
+    "icon_emoji": ":ghost:"
+  })
+);
 
 // Parsing message
 function parseMessage(msg, data) {
