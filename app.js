@@ -29,6 +29,28 @@ var client = new CartoDB({
 
 client.connect();
 
+// SLACK client
+var options = {
+  host: 'vizzuality.slack.com',
+  port: 443,
+  path: '/services/hooks/incoming-webhook\?token\=eRwr6My5dNarlhUKiiK8wfVh',
+  method: 'POST',
+  "Content-Type": "application/json",
+}; 
+
+var slack = https.request(options, function(res) {
+  res.setEncoding('utf8');
+  res.on('data', function (chunk) {
+    console.log('body: ' + chunk); 
+  });
+}); 
+
+slack.on('error', function(e) {
+  console.log('problem with request: ' + e.message);
+}); 
+
+
+
 // Runs every week at 09:00:00 AM checking if there was
 // any change in the number of pairs at vizziotica
 var check_cron = new cronJob({
@@ -82,6 +104,16 @@ var job = new cronJob({
             }]
           };
 
+          // Send birthday to Vizzuality slack app
+          slack.end(
+            JSON.stringify({
+              "channel":    "#general",
+              "username":   "Mr. Cake",
+              "text":       _u.template("Happy birthday {{ alias }}!")(d_),
+              "icon_emoji": ":birthday:"
+            })
+          );
+
           server.send(message, function(err, msg) {
             if (err) console.log(err);
           });
@@ -115,6 +147,16 @@ var job = new cronJob({
                   alternative:  true
                 }]
               };
+
+              // Send birthday to Vizzuality slack app
+              slack.end(
+                JSON.stringify({
+                  "channel":    "#general",
+                  "username":   "cleaningbot",
+                  "text":       _u.template("This week the cleaning personel is {{ rows[0].alias }} & {{ rows[1].alias }}")(data),
+                  "icon_emoji": ":shit:"
+                })
+              );
 
               server.send(message, function(err, msg) {
                 if (err) console.log(err);
@@ -213,34 +255,6 @@ if (!module.parent) {
   app.listen(port);
   console.log('Vizziotica app started on port ' + port);
 }
-
-var options = {
-  host: 'vizzuality.slack.com',
-  port: 443,
-  path: '/services/hooks/incoming-webhook\?token\=eRwr6My5dNarlhUKiiK8wfVh',
-  method: 'POST',
-  "Content-Type": "application/json",
-}; 
-
-var r = https.request(options, function(res) {
-  res.setEncoding('utf8');
-  res.on('data', function (chunk) {
-    console.log('body: ' + chunk); 
-  });
-}); 
-
-r.on('error', function(e) {
-  console.log('problem with request: ' + e.message);
-}); 
-
-r.end(
-  JSON.stringify({
-    "channel":    "#general",
-    "username":   "cleaningbot",
-    "text":       "This week the cleaning personel is X & Y",
-    "icon_emoji": ":ghost:"
-  })
-);
 
 // Parsing message
 function parseMessage(msg, data) {
