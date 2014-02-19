@@ -173,7 +173,7 @@ var job = new cronJob({
   timeZone: "Europe/Madrid"
 });
 
-job.start();
+// job.start();
 
 
 // Server
@@ -226,6 +226,34 @@ app.post('/bot/cleaning', function(req, res){
   });
 });
 
+app.post('/bot/birthdays', function(req, res) {
+
+  // Any birthday?
+  client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, guys){
+
+    var arr = [];
+
+    // Check if it is birthday
+    for (var i = 0; i < guys.rows.length; i++) {
+      var birth = new Date(guys.rows[i].birthday);
+      var utc = birth.getTime() + (birth.getTimezoneOffset() * 60000);
+      var d = new Date(utc + (3600000*1));
+
+      if (d.getMonth() == today.getMonth() && d.getDate() == today.getDate()) {
+        arr.push(guys.rows[i]);
+      }
+    }
+
+    if (guys.length > 0) {
+      res.json({ "text": _u.template("Happy birthday <% for (var i=0,l=guys.length; i<l; i++) { %><%if (i > 0) {%>" & "<% }%><%= guys[i].alias %><% } %>")({ guys: arr })  });
+    } else {
+      res.json({ "text": "No births, no cakes, no fun..." });
+    }
+
+  });
+  
+});
+
 app.get('/birthdays', function(req, res) {
 
   var birthdays = "";
@@ -243,7 +271,7 @@ app.get('/birthdays', function(req, res) {
     res.write(birthdays);
     res.end();
   });
-})
+});
 
 // Error pages //
 
