@@ -295,8 +295,17 @@ app.post('/bot/birthdays/next', function(req, res) {
     });
 
     var next = arr[0];
+    var months = ["Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     next.birthday = new Date(next.birthday);
-    res.json({ "text": _u.template("{{ alias }} will turn {{ (birthday.getAge() + 1) }} on {{ birthday.getMonth() + 1 }}/{{ birthday.getDate() }}")(next)  });
+    next.month    = months(birthday.getMonth());
+    next.day      = birthday.getDate();
+    next.suffix   = "th";
+
+    if (next.day == 1) next.suffix = "st";
+    else if (next.day == 2) next.suffix = "nd";
+    else if (next.day == 3) next.suffix = "rd";
+
+    res.json({ "text": _u.template("{{ alias }} will turn {{ (birthday.getAge() + 1) }} on the {{ day }}{{suffix}} of {{ month }}")(next)  });
   });
 
 });
