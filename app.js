@@ -173,7 +173,7 @@ var job = new cronJob({
   timeZone: "Europe/Madrid"
 });
 
-job.start();
+// job.start();
 
 
 // Server
@@ -206,6 +206,22 @@ app.get('/', function(req, res){
       });
     } else {
       res.render('error');
+    }
+  });
+});
+
+app.get('/bot/cleaning', function(req, res){
+  // Get turn
+  var actual_week = new Date().getWeekFrom(start_date);
+  var turn = actual_week % pairs;
+
+  client.query("SELECT p1_guy,p2_guy FROM cleaning_pairs WHERE turns=" + turn, {}, function(err, guys){
+    if (!err && guys.rows && guys.rows.length > 0) {
+      client.query("SELECT * FROM cleaning_guys WHERE cartodb_id=" + guys.rows[0].p1_guy + " OR cartodb_id=" + guys.rows[0].p2_guy , {}, function(err, data){
+        res.json({ "text": _u.template("This week the cleaning personel is {{ rows[0].alias }} & {{ rows[1].alias }}")(data) });
+      });
+    } else {
+      res.json({ "text": "Shit happens..." });
     }
   });
 });
