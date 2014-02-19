@@ -232,6 +232,7 @@ app.post('/bot/birthdays', function(req, res) {
   client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, guys){
 
     var arr = [];
+    var today = new Date();
 
     // Check if it is birthday
     for (var i = 0; i < guys.rows.length; i++) {
