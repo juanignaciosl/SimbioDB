@@ -33,7 +33,7 @@ client.connect();
 var options = {
   host: 'vizzuality.slack.com',
   port: 443,
-  path: '/services/hooks/incoming-webhook\?token\=eRwr6My5dNarlhUKiiK8wfVh',
+  path: '/services/hooks/incoming-webhook\?token\=' + CONFIG.slack.token,
   method: 'POST',
   "Content-Type": "application/json",
 }; 
@@ -173,7 +173,7 @@ var job = new cronJob({
   timeZone: "Europe/Madrid"
 });
 
-// job.start();
+job.start();
 
 
 // Server

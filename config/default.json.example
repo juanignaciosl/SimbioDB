@@ -1,4 +1,7 @@
 {
+  "slack": {
+    "token": ""
+  },
   "gmail": {
     "username": "hello",
     "email":    "hello@world.com",
