@@ -297,7 +297,7 @@ app.post('/bot/birthdays/next', function(req, res) {
     var next = arr[0];
     var months = ["Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     next.birthday = new Date(next.birthday);
-    next.month    = months(next.birthday.getMonth());
+    next.month    = months[next.birthday.getMonth()];
     next.day      = next.birthday.getDate();
     next.suffix   = "th";
 
