@@ -12,11 +12,12 @@ var server  = email.server.connect({
 });
 var https = require("https");
 
+
 // App vars
 var pairs       = 8;
 var start_date  = new Date('2013-10-24');
 
-// Underscore 
+// Underscore
 _u.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
 };
@@ -36,18 +37,18 @@ var options = {
   path: '/services/hooks/incoming-webhook\?token\=' + CONFIG.slack.token,
   method: 'POST',
   "Content-Type": "application/json",
-}; 
+};
 
 var slack = https.request(options, function(res) {
   res.setEncoding('utf8');
   res.on('data', function (chunk) {
-    console.log('body: ' + chunk); 
+    console.log('body: ' + chunk);
   });
-}); 
+});
 
 slack.on('error', function(e) {
   console.log('problem with request: ' + e.message);
-}); 
+});
 
 
 
@@ -94,7 +95,7 @@ var job = new cronJob({
 
           var message = {
             text:        _u.template("Happy birthday {{ alias }}!")(d_),
-            from:        "Vizziotica <chorradas@vizzuality.com>", 
+            from:        "Vizziotica <chorradas@vizzuality.com>",
             to:          CONFIG.gmail.to,
             cc:          "",
             subject:     _u.template("Happy birthday {{ alias }}!")(d_),
@@ -138,7 +139,7 @@ var job = new cronJob({
               // Email message
               var message = {
                 text:        _u.template("This week {{ rows[0].alias }} and {{ rows[1].alias }} are going to clean the office :)")(data),
-                from:        "Vizziotica <chorradas@vizzuality.com>", 
+                from:        "Vizziotica <chorradas@vizzuality.com>",
                 to:          CONFIG.gmail.to,
                 cc:          "",
                 subject:     _u.template("This week {{ rows[0].alias }} and {{ rows[1].alias }} are going to clean the office :)")(data),
@@ -162,7 +163,7 @@ var job = new cronJob({
                 if (err) console.log(err);
               });
             }
-              
+
           });
         }
       });
@@ -182,7 +183,7 @@ var app = express();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade'); 
+  app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.compress());
@@ -248,7 +249,7 @@ app.post('/bot/birthdays', function(req, res) {
     var msg = "Happy birthday ";
     for (var i=0,l=arr.length; i<l; i++) {
       if (i > 0) {
-        msg += "& "; 
+        msg += "& ";
       }
       msg += arr[i].alias + " ";
     }
@@ -260,7 +261,7 @@ app.post('/bot/birthdays', function(req, res) {
     }
 
   });
-  
+
 });
 
 app.post('/bot/birthdays/next', function(req, res) {
@@ -297,7 +298,7 @@ app.post('/bot/birthdays/next', function(req, res) {
     next.birthday = new Date(next.birthday);
     res.json({ "text": _u.template("{{ alias }} will turn {{ (birthday.getAge() + 1) }} on {{ birthday.getMonth() + 1 }}/{{ birthday.getDate() }}")(next)  });
   });
-  
+
 });
 
 app.get('/birthdays', function(req, res) {
