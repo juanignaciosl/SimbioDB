@@ -173,7 +173,7 @@ var job = new cronJob({
   timeZone: "Europe/Madrid"
 });
 
-// job.start();
+job.start();
 
 
 // Server
@@ -245,12 +245,57 @@ app.post('/bot/birthdays', function(req, res) {
       }
     }
 
-    if (guys.length > 0) {
-      res.json({ "text": _u.template("Happy birthday <% for (var i=0,l=guys.length; i<l; i++) { %><%if (i > 0) {%>" & "<% }%><%= guys[i].alias %><% } %>")({ guys: arr })  });
+    var msg = "Happy birthday ";
+    for (var i=0,l=arr.length; i<l; i++) {
+      if (i > 0) {
+        msg += "& "; 
+      }
+      msg += arr[i].alias + " ";
+    }
+
+    if (arr.length > 0) {
+      res.json({ "text": _u.template("{{ msg }}")({ msg: msg })  });
     } else {
       res.json({ "text": "No births, no cakes, no fun..." });
     }
 
+  });
+  
+});
+
+app.post('/bot/birthdays/next', function(req, res) {
+
+  // Any birthday?
+  client.query("SELECT alias, birthday, twitter, description, name, st_x(the_geom) as lon, st_y(the_geom) as lat FROM cleaning_guys WHERE birthday IS NOT NULL AND active IS true", {}, function(err, guys){
+
+    var arr = [];
+    var today = new Date();
+
+    // Check if it is birthday
+    for (var i = 0; i < guys.rows.length; i++) {
+      var birth = new Date(guys.rows[i].birthday);
+      var utc = birth.getTime() + (birth.getTimezoneOffset() * 60000);
+      var d = new Date(utc + (3600000*1));
+
+      if (
+        (d.getDate() > today.getDate() && d.getMonth() >= today.getMonth()) ||
+        (d.getMonth() > today.getMonth())
+      ) {
+        arr.push(guys.rows[i]);
+      }
+    }
+
+    arr.sort(function(a,b){
+      var d = new Date(b.birthday);
+      d.setFullYear(today.getFullYear());
+      var c = new Date(a.birthday);
+      c.setFullYear(today.getFullYear());
+      return c - d;
+    });
+
+    var next = arr[0];
+    next.birthday = new Date(next.birthday);
+    res.json({ "text": _u.template("{{ alias }} will turn {{ (birthday.getAge() + 1) }} on {{ birthday.getMonth() + 1 }}/{{ birthday.getDate() }}")(next)  });
   });
   
 });
