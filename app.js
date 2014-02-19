@@ -210,7 +210,7 @@ app.get('/', function(req, res){
   });
 });
 
-app.get('/bot/cleaning', function(req, res){
+app.post('/bot/cleaning', function(req, res){
   // Get turn
   var actual_week = new Date().getWeekFrom(start_date);
   var turn = actual_week % pairs;
