@@ -10,10 +10,12 @@ block content
           if i !== 0
             li.special +
           li
-            img(src="/img/#{ rows[i].twitter }.png", title="#{ rows[i].alias }", class="avatar")
+            img(src="/img/#{ rows[i].photo || "default" }.png", title="#{ rows[i].alias }", class="avatar")
             p(class="bold center") #{ rows[i].alias }
+            - if (rows[i].twitter) {
             p.center
               a(href="http://twitter.com/#{ rows[i].twitter }", target="_blank") @#{ rows[i].twitter }
+            - }
         - }
     div.bottom
       p.small Eloy Gonzalo 27, 2º floor, 6th & 7th door

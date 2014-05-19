@@ -4,6 +4,7 @@
    *
    */
 
+
   // Load external resources
   var _u = require('underscore');
   var CONFIG  = require("config-heroku");
@@ -32,7 +33,6 @@
   var jobs = require('./lib/jobs');
   jobs.initGroupsCron();
   jobs.initWeekCron();
-
 
   if (!module.parent) {
     var port = process.env.PORT || 5000;

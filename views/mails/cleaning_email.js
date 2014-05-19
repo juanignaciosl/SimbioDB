@@ -131,39 +131,56 @@
                           <tr align="left" width="523" height="30" border="0" valign="top" bgcolor="#FFFFFF"></tr>
                           <tr align="left" width="523" height="100" border="0" valign="top" bgcolor="#FFFFFF">
                             <td align="left" width="200" height="100"></td>
-                            <td align="left" width="100" height="100">
-                              <img width="100" height="100" src="{{ host }}/img/{{ rows[0].twitter }}.png" title="{{ rows[0].alias }}"/>
-                            </td>
-                            <td align="left" valign="bottom" width="74" height="20">
-                              <p style="font:bold 18px Arial; color:#ABABAB; text-align:center"><font color="ABABAB" size="8">+</font></p>
-                            </td>
-                            <td align="left" width="100" height="100">
-                              <img width="100" height="100" src="{{ host }}/img/{{ rows[1].twitter }}.png" title="{{ rows[0].alias }}"/>
-                            </td>
+
+                            {{ for (var i = 0, l = rows.length; i<l; i++) { }}
+                              
+                              <td align="left" width="100" height="100">
+                                <img width="100" height="100" src="{{= host }}/img/{{= rows[i].photo }}.png" title="{{= rows[i].alias }}"/>
+                              </td>
+                              {{ if (i+i < l) { }}
+                                <td align="left" valign="bottom" width="74" height="20">
+                                  <p style="font:bold 18px Arial; color:#ABABAB; text-align:center"><font color="ABABAB" size="8">+</font></p>
+                                </td>
+                              {{ } }}
+
+                            {{ } }}
+                            
                             <td align="left" width="200" height="100"></td>
                           </tr>
                           <tr align="left" width="523" height="15" border="0" valign="top" bgcolor="#FFFFFF"></tr>
                           <tr align="left" width="523" height="18" border="0" valign="top" bgcolor="#FFFFFF">
                             <td align="left" height="18" width="200"></td>
-                            <td align="left" height="18" width="100">
-                              <p style="margin:0; padding:0; font:bold 16px Arial; color:#444444; text-align:center; -webkit-margin-before:0em!important; -webkit-margin-after:0em!important;"><font color="444444">{{ rows[0].alias }}</font></p>
-                            </td>
-                            <td align="left" height="18" width="74"></td>
-                            <td align="left" height="18" width="100">
-                              <p style="margin:0; padding:0; font:bold 16px Arial; color:#444444; text-align:center; -webkit-margin-before:0em!important; -webkit-margin-after:0em!important;"><font color="444444">{{ rows[1].alias }}</font></p>
-                            </td>
+
+                            {{ for (var i = 0, l = rows.length; i<l; i++) { }}
+
+                              <td align="left" height="18" width="100">
+                                <p style="margin:0; padding:0; font:bold 16px Arial; color:#444444; text-align:center; -webkit-margin-before:0em!important; -webkit-margin-after:0em!important;"><font color="444444">{{= rows[i].alias }}</font></p>
+                              </td>
+                              {{ if (i+i < l) { }}
+                                <td align="left" height="18" width="74"></td>
+                              {{ } }}                              
+
+                            {{ } }}
+
                             <td align="left" height="18" width="200"></td>
                           </tr>
                           <tr align="left" width="523" height="3" border="0" valign="top" bgcolor="#FFFFFF"></tr>
                           <tr align="left" width="523" height="18" border="0" valign="top" bgcolor="#FFFFFF">
                             <td align="left" height="16" width="200"></td>
-                            <td align="left" height="16" width="100">
-                              <p style="margin:0; padding:0; text-align:center;"><a style="font:normal 14px Arial; color:#397DB9; -webkit-margin-before:0em!important; -webkit-margin-after:0em!important;" href="http://twitter.com/{{ rows[0].twitter }}">@{{ rows[0].twitter }}</a></p>
-                            </td>
-                            <td align="left" height="16" width="74"></td>
-                            <td align="left" height="16" width="100">
-                              <p style="margin:0; padding:0; text-align:center;"><a style="font:normal 14px Arial; color:#397DB9; -webkit-margin-before:0em!important; -webkit-margin-after:0em!important;" href="http://twitter.com/{{ rows[1].twitter }}">@{{ rows[1].twitter }}</a></p>
-                            </td>
+
+                            {{ for (var i = 0, l = rows.length; i<l; i++) { }}
+
+                              <td align="left" height="16" width="100">
+                                {{ if (rows[i].twitter) { }}  
+                                  <p style="margin:0; padding:0; text-align:center;"><a style="font:normal 14px Arial; color:#397DB9; -webkit-margin-before:0em!important; -webkit-margin-after:0em!important;" href="http://twitter.com/{{= rows[i].twitter }}">@{{= rows[i].twitter }}</a></p>
+                                {{ } }}
+                              </td>
+                              {{ if (i+i < l) { }}
+                                <td align="left" height="16" width="74"></td>
+                              {{ } }}
+
+                            {{ } }}
+
                             <td align="left" height="16" width="200"></td>
                           </tr>
                           <tr align="left" width="523" height="40" border="0" valign="top" bgcolor="#FFFFFF"></tr>
@@ -189,7 +206,7 @@
                   <tr alignt="left" width="523">
                     <td align="left" width="34"></td>
                     <td align="left" width="224" height="24" border="0" valign="top" bgcolor="#FFFFFF">
-                      <a style="margin:0; padding:0; font:normal 12px Arial; color:#397DB9;" href="{{ host }}">Go here to see the HTML</a>
+                      <a style="margin:0; padding:0; font:normal 12px Arial; color:#397DB9;" href="{{= host }}">Go here to see the HTML</a>
                     </td>
                     <td align="right" width="224" height="24" border="0" valign="top" bgcolor="#FFFFFF">
                       <p style="width:224px; margin:0; padding:0; font:normal 12px Arial; color:#ABABAB; text-aling:right;">Eloy Gonzalo 27, 2º floor, 6th & 7th door</p>

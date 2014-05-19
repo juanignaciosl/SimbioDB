@@ -96,7 +96,7 @@
                   <tr align="left" width="523" border="0" valign="top" bgcolor="#FFFFFF">
                     <td align="left" width="34" border="0" valign="top"></td>
                     <td color="#666666" width="455" valign="top">
-                      <h1 style="margin:0; padding:0; font:bold 27px Arial; color:#333333; text-align:center"><font color="333333">Happy birthday {{ alias }}!</font></h1>
+                      <h1 style="margin:0; padding:0; font:bold 27px Arial; color:#333333; text-align:center"><font color="333333">Happy birthday {{= alias }}!</font></h1>
                     </td>
                     <td align="left" width="34" border="0" valign="top"></td>
                   </tr>
@@ -116,26 +116,30 @@
                   <tr align="left" width="523" border="0" valign="top" bgcolor="#FFFFFF">
                     <td align="left" width="34" border="0" valign="top"></td>
                     <td color="#666666" width="455" valign="top">
-                      <p style="width:455px; margin:0; padding:0; font:normal 15px Arial; color:#666666; text-align:center"><font color="666666"><strong>{{ birthday.getAge() }}</strong> years ago</font></p>
+                      <p style="width:455px; margin:0; padding:0; font:normal 15px Arial; color:#666666; text-align:center"><font color="666666"><strong>{{= birthday.getAge() }}</strong> years ago</font></p>
                     </td>
                     <td align="left" width="34" border="0" valign="top"></td>
                   </tr>
                 </tbody>
               </table>
               
+              {{ if (photo) { }}
               <table width="523" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                   <tr align="left" width="523" height="20" border="0" valign="top" bgcolor="#FFFFFF"></tr>
                   <tr align="left" width="523" border="0" valign="top" bgcolor="#FFFFFF">
                     <td align="left" width="211" border="0" valign="top"></td>
                     <td color="#666666" width="100" valign="top">
-                      <img width="100" height="100" src="{{ host }}/img/{{ twitter }}.png" title="{{ name }}" alt="{{ name }}"/>
+                      <img width="100" height="100" src="{{= host }}/img/{{= photo }}.png" title="{{= name }}" alt="{{= name }}"/>
                     </td>
                     <td align="left" width="211" border="0" valign="top"></td>
                   </tr>
                 </tbody>
               </table>
+              {{ } }}
+              
 
+              {{ if (lat) { }}
               <table width="523" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                   <tr align="left" width="523" height="20" border="0" valign="top" bgcolor="#FFFFFF"></tr>
@@ -155,25 +159,29 @@
                   <tr align="left" width="523" border="0" valign="top" bgcolor="#FFFFFF">
                     <td align="left" width="34" border="0" valign="top"></td>
                     <td color="#666666" width="455" valign="top">
-                      <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ lat }},{{ lon }}&zoom=7&size=455x150&maptype=roadmap&markers=color:blue%7C{{ lat }},{{ lon }}&sensor=false" width="455" title="" alt=""/>
+                      <img src="http://maps.googleapis.com/maps/api/staticmap?center={{= lat }},{{= lon }}&zoom=7&size=455x150&maptype=roadmap&markers=color:blue%7C{{= lat }},{{= lon }}&sensor=false" width="455" title="" alt=""/>
                     </td>
                     <td align="left" width="34" border="0" valign="top"></td>
                   </tr>
                 </tbody>
               </table>
+              {{ } }}
+            
 
+              {{ if (twitter) { }}
               <table width="523" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                   <tr align="left" width="523" height="20" border="0" valign="top" bgcolor="#FFFFFF"></tr>
                   <tr align="left" width="523" height="24" border="0" valign="top" bgcolor="#FFFFFF">
                     <td align="left" width="523" height="15">
                       <p style="width:523px; margin:0; padding:0; font:normal 15px Arial; color:#666666; text-align:center">
-                        <font color="666666">Congratulate him at <a style="font:normal 14px Arial; color:#397DB9; -webkit-margin-before:0em!important; -webkit-margin-after:0em!important;" href="http://twitter.com/{{ twitter }}">@{{ twitter }}</a>.</font>
+                        <font color="666666">Congratulate him at <a style="font:normal 14px Arial; color:#397DB9; -webkit-margin-before:0em!important; -webkit-margin-after:0em!important;" href="http://twitter.com/{{= twitter }}">@{{= twitter }}</a>.</font>
                       </p>
                     </td>
                   </tr>
                 </tbody>
               </table>
+              {{ } }}
               
               <table width="523" border="0" cellspacing="0" cellpadding="0">
                 <tbody>

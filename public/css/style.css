@@ -6,11 +6,11 @@
   p {margin:0; padding:0; font:normal 15px Arial; color:#666666;}
   p.bold {margin:8px 0 0; font:bold 16px Arial; color:#444; letter-spacing:-1px}
   p.center {text-align:center;}
-  div.list {width:294px; margin:0 auto;}
+  div.list {width:100%; margin:0 auto;}
   div.image {margin:50px 0;}
-  ul {display:block; margin:50px 0 0; padding:0; list-style:none; letter-spacing:-4px;}
-  li {display:inline-block; *display:inline; zoom:1; vertical-align:top; width:120px; letter-spacing:0;}
-  li.special {width:54px; padding:50px 0 0; font:bold 40px Arial; color:#ABABAB; text-align:center; vertical-align:top;}
+  ul {display:block; margin:50px 0 0; padding:0; list-style:none; letter-spacing:-4px; text-align:center;}
+  li {display:inline-block; *display:inline; zoom:1; vertical-align:top; width:auto; min-width:100px; letter-spacing:0;}
+  li.special {min-width:34px; width:34px!important; padding:50px 0 0; font:bold 40px Arial; color:#ABABAB; text-align:center; vertical-align:top;}
   img.avatar {margin:0 10px;}
   a {margin:5px 0 0; font:normal 14px Arial; color:#397DB9; text-align:center; text-decoration:none;}
   a:hover {text-decoration:underline}
