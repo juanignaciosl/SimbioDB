@@ -1,4 +1,4 @@
-Vizziotica
+SimbioDB
 ===============
 
-Let's clean Vizziotica office!
+Let's clean SimbioDB office!

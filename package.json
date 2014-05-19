@@ -1,16 +1,18 @@
 {
-  "name": "vizzuality-mail",
-  "description": "Send an email to Vizziotica with the cleaning pairs",
+  "name": "simbiodb",
+  "description": "Send an email to SimbioDB with the cleaning pairs",
   "version": "0.0.1",
   "author": "Javier Álvarez <xavijam@gmail.com> (http://xavij.am/)",
   "keywords": [
-    "Vizziotica",
+    "SimbioDB",
     "email",
     "gmail",
     "clean",
     "office",
-    "Vizzuality",
-    "Simbiotica"
+    "CartoDB",
+    "Simbiotica",
+    "Eloy Gonzalo",
+    "Madrid office"
   ],
   "maintainers": [
     {
@@ -25,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/xavijam/vizziotica-mail"
+    "url": "http://github.com/xavijam/simbiodb"
   },
   "engines": {
     "node": ">= 0.10.5",
@@ -36,6 +38,8 @@
     "yaml": "0.2.3",
     "underscore": "*",
     "config-heroku": "0.1.1-a",
+    "node-twitter": "0.5.0",
+    "twit": "1.1.5",
     "config": "0.4.24",
     "cron": "1.0.1",
     "time": "0.9.2",

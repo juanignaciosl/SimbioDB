@@ -3,21 +3,17 @@ extends layout
 block content
   div(class="main")
     h1 Who are going to clean this week?
-    p These guys will take care of the Vizziotica office this week. It doesn't mean you don't have to help them. Don't be dirty and collaborate, it's easy and free.
+    p These guys will take care of the SimbioDB office this week. It doesn't mean you don't have to help them. Don't be dirty and collaborate, it's easy and free.
     div.list
       ul
-        if (rows[0])
+        - for (var i = 0, l = rows.length; i < l; ++i) {
+          if i !== 0
+            li.special +
           li
-            img(src="/img/#{ rows[0].twitter }.png", title="#{ rows[0].alias }", class="avatar")
-            p(class="bold center") #{ rows[0].alias }
+            img(src="/img/#{ rows[i].twitter }.png", title="#{ rows[i].alias }", class="avatar")
+            p(class="bold center") #{ rows[i].alias }
             p.center
-              a(href="http://twitter.com/#{ rows[0].twitter }", target="_blank") @#{ rows[0].twitter }
-        if (rows[1])
-          li.special +
-          li
-            img(src="/img/#{ rows[1].twitter }.png", title="#{ rows[1].alias }", class="avatar")
-            p(class="bold center") #{ rows[1].alias }
-            p.center
-              a(href="http://twitter.com/#{ rows[1].twitter }", target="_blank") @#{ rows[1].twitter }
+              a(href="http://twitter.com/#{ rows[i].twitter }", target="_blank") @#{ rows[i].twitter }
+        - }
     div.bottom
       p.small Eloy Gonzalo 27, 2º floor, 6th & 7th door

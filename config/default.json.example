@@ -1,4 +1,8 @@
 {
+  "app": {
+    "start_date": "2013-10-24",
+    "groups":     9
+  },
   "slack": {
     "token": ""
   },
