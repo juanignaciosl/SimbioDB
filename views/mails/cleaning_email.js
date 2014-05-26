@@ -111,7 +111,7 @@
                         <tr>
                           <td width="20" valign="top"></td>
                           <td color="#666666" width="455" valign="top" height="15">
-                            <p style="width:455px; margin:0; padding:0; font:normal 15px Arial; color:#666666;"><font color="666666">These guys will take care of the Vizziotica office this week. It doesn't mean you don't have to help them. Don't be dirty and collaborate, it's easy and free.</font></p>
+                            <p style="width:455px; margin:0; padding:0; font:normal 15px Arial; color:#666666;"><font color="666666">These guys will take care of the SimbioDB office this week. It doesn't mean you don't have to help them. Don't be dirty and collaborate, it's easy and free.</font></p>
                           </td>
                         </tr>
                       </table>
