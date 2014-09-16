@@ -1,0 +1,32 @@
+cartodb_id,name,alias,company,photo,birthday,twitter,longitude,latitude
+1,David González,David,Simbiótica,david,1975-05-07 00:00:00+00,d4weed,-3.67953665,40.43794473
+2,Javier Arce,Arce,CartoDB,arce,1981-06-18 20:00:00+00,javier,-5.57556152,42.60364161
+3,Javier de la Torre,Jatorre,CartoDB,jatorre,1981-07-07 00:00:00+00,jatorre,-3.62529575,40.55410743
+5,Sergio Estella,Sergio,Simbiótica,estella,1975-12-29 00:00:00+00,sergio_estella,-3.67953,40.4379
+6,Sergio Álvarez,Saleiva,CartoDB,saleiva,1985-10-09 00:00:00+00,saleiva,-3.8699611,40.3231
+8,Luis Bosque,Luisico,CartoDB,luisico,1981-08-24 00:00:00+00,luisico,-0.89498,41.6517
+10,David Inga,Inga,Simbiótica,inga,1988-04-19 00:00:00+00,davidsingal,-78.5042,-7.160637
+12,Daniel Caso,Dani Caso,Simbiótica,danicaso,1986-10-05 00:00:00+00,danielcasius,-6.37189865,39.47436547
+13,Carlos Matallín,Matalló,CartoDB,matallo,1988-02-02 00:00:00+00,matallo,-0.3532,39.49374
+15,Javier Álvarez,Jamón,CartoDB,jamon,1985-12-20 00:00:00+00,xavijam,-3.6795366,40.43794
+16,Alejandro Martínez,Alejandro,CartoDB,zenitram,1991-02-18 00:00:00+00,iamzenitram,-2.457116,36.84153
+17,Javier Santana,Santana,CartoDB,santana,1981-11-05 00:00:00+00,javisantana,-5.216606,41.3071
+21,Diego Muñoz,Kartones,CartoDB,kartones,1981-05-20 00:00:00+00,kartones,-3.70379,40.416775
+22,Clara Linos,Clara,Simbiótica,clara,1984-07-19 13:32:00+00,dhakelila,-3.67541683,40.45780105
+23,Carla Iriberri,Iriberri,CartoDB,iriberri,1992-08-04 00:00:00+00,iriberri1,-0.69900513,38.26891498
+24,Nicolás Jaremek,Nico,CartoDB,NickJaremek,,,,
+25,Raúl Ochoa,Rochoa,CartoDB,rochoa,,rochoa,-2.444985,42.462719
+26,Emilio García,Emilio,CartoDB,emilio,,piensaenpixel,-3.70379,40.416775
+27,AG,AG,CartoDB,ag,,,19.503304,47.162494
+28,Álvaro Órtiz,Furilo,CartoDB,furilo,,furilo,,
+29,Miguel Arias,Marias,CartoDB,marias,2014-07-07 00:00:00+00,marias,,
+30,Pedro,Pedro,Simbiótica,pedro,1988-12-14 13:34:02+00,pdgago,,
+31,Andrés,Andrés,Simbiótica,andres,1991-10-17 13:35:42+00,VAlandiI,,
+33,Adrián Pérez,Adrián,Simbiotica,,1988-09-30 00:00:00+00,adrpz,-2.223667,43.07563
+34,Dani Mota,Dani Mota,"""Secret company""",danimota,1982-08-02 00:00:00+00,icebeat,-6.232909,36.600595
+35,Yash Arora,Yash,CartoDB,,,yasharora73,,
+36,Jaime de Mora,Jaime,CartoDB,,,jaimedemora,,
+37,Sebastian,Sebastian,Simbiótica,,1985-05-15 12:55:34+00,,,
+38,Javier Santana,Santana,CartoDB,santana,1981-11-05 13:51:12+00,javisantana,-5.216606,41.3071
+39,Rafa de la Torre,Rafa,CartoDB,,,,,
+40,Katherine Pennacchio,Kathy,CartoDB,,,KathyPennacchio,-66.590195,6.419707
