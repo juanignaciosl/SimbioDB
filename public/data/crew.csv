@@ -15,18 +15,18 @@ cartodb_id,name,alias,company,photo,birthday,twitter,longitude,latitude
 22,Clara Linos,Clara,Simbiótica,clara,1984-07-19 13:32:00+00,dhakelila,-3.67541683,40.45780105
 23,Carla Iriberri,Iriberri,CartoDB,iriberri,1992-08-04 00:00:00+00,iriberri1,-0.69900513,38.26891498
 24,Nicolás Jaremek,Nico,CartoDB,NickJaremek,,,,
-25,Raúl Ochoa,Rochoa,CartoDB,rochoa,,rochoa,-2.444985,42.462719
-26,Emilio García,Emilio,CartoDB,emilio,,piensaenpixel,-3.70379,40.416775
-27,AG,AG,CartoDB,ag,,,19.503304,47.162494
-28,Álvaro Órtiz,Furilo,CartoDB,furilo,,furilo,,
+25,Raúl Ochoa,Rochoa,CartoDB,rochoa,1985-03-26,rochoa,-2.444985,42.462719
+26,Emilio García,Emilio,CartoDB,emilio,1973-11-01,piensaenpixel,-3.70379,40.416775
+27,AG,AG,CartoDB,ag,1983-12-02 15:12:00-8:00,CartogrAgi,34.1377683,-118.1518749
+28,Álvaro Órtiz,Furilo,CartoDB,furilo,1980-11-06,furilo,,
 29,Miguel Arias,Marias,CartoDB,marias,2014-07-07 00:00:00+00,marias,,
 30,Pedro,Pedro,Simbiótica,pedro,1988-12-14 13:34:02+00,pdgago,,
 31,Andrés,Andrés,Simbiótica,andres,1991-10-17 13:35:42+00,VAlandiI,,
 33,Adrián Pérez,Adrián,Simbiotica,,1988-09-30 00:00:00+00,adrpz,-2.223667,43.07563
 34,Dani Mota,Dani Mota,"""Secret company""",danimota,1982-08-02 00:00:00+00,icebeat,-6.232909,36.600595
-35,Yash Arora,Yash,CartoDB,,,yasharora73,,
-36,Jaime de Mora,Jaime,CartoDB,,,jaimedemora,,
+35,Yash Arora,Yash,CartoDB,,1989-09-03,yasharora73,23.2602203,77.4153328
+36,Jaime de Mora,Jaime,CartoDB,,1985-01-08,jaimedemora,,
 37,Sebastian,Sebastian,Simbiótica,,1985-05-15 12:55:34+00,,,
 38,Javier Santana,Santana,CartoDB,santana,1981-11-05 13:51:12+00,javisantana,-5.216606,41.3071
 39,Rafa de la Torre,Rafa,CartoDB,,,,,
-40,Katherine Pennacchio,Kathy,CartoDB,,,KathyPennacchio,-66.590195,6.419707
+40,Katherine Pennacchio,Kathy,CartoDB,,1990-08-30,KathyPennacchio,-66.590195,6.419707
